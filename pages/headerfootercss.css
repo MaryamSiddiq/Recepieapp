@@ -1,0 +1,104 @@
+
+.footer{
+  padding-left: 6%;
+  padding-right: 6%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  display: flex;
+  column-gap: 5%;
+  background-color: #F5F6F7
+}
+.col1{
+  width: 40%;
+  display: flex;
+}
+.col2{
+  width: 20%;
+}
+.col3{
+  width: 20%;
+}
+.col4{
+  width: 20%;
+}
+#limage{
+  display: inline-block;
+padding-top: 11%;
+padding-right: 5%;
+}
+.col4 .social-icons i{
+color: orange;
+font-size: 30px;
+padding: 2%;
+}
+.col4 .social-icons{
+padding-bottom: 3%;
+
+}
+.footer  li{
+  text-decoration: none;
+  list-style: none;
+  color: var(--secondary-color);
+  padding: 5px 5px 5px 0px;
+  cursor: pointer;
+}
+
+.header{
+padding-left: 4%;
+padding-right: 02%;
+padding-top: 3%;
+padding-bottom: 2%;
+display: flex;
+column-gap: 5%;
+}
+.logo{
+    width: 20%;
+}
+.menuitems{
+    width:80%;
+    margin-left: 7%;
+}
+.menuitems ul{
+    display: flex;
+}
+.header .menuitems ul li{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+    padding: 0px 40px 5px 5px;
+    cursor: pointer;
+    display: flex;
+  font-weight: 550;
+font-size: 19px;
+}
+.header .menuitems ul a{
+  text-decoration: none;
+}
+.header .menuitems ul li:hover{
+ 
+color: rgb(97, 95, 95);
+
+}
+.button1{
+    background-color: #43a724;
+    color: white;
+    border: 1px solid #43a724;
+    border-radius: 34px;
+    padding: 14px;
+    width: 130px;
+    margin-top: -14px;
+  font-weight: 550;
+cursor: pointer;
+}
+
+.button2{
+    background-color: white;
+    color: #43a724;
+    border: 2px solid #43a724;
+    border-radius: 34px;
+    padding: 14px;
+    width: 130px;
+    margin-top: -14px;
+  font-weight: 600;
+cursor: pointer;
+}
