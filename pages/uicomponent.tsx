@@ -17,7 +17,6 @@ interface Recipe {
 }
 
 const HomePage: React.FC = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [name, setName] = useState('');
   const [cookingTime, setCookingTime] = useState('');
   const [description, setDescription] = useState('');
@@ -42,7 +41,11 @@ const HomePage: React.FC = () => {
       imageUrl,
     };
 
-    setRecipes([...recipes, newRecipe]);
+    const storedRecipes = localStorage.getItem('recipes');
+    const recipes = storedRecipes ? JSON.parse(storedRecipes) : [];
+    recipes.push(newRecipe);
+    localStorage.setItem('recipes', JSON.stringify(recipes));
+
     setName('');
     setCookingTime('');
     setDescription('');
@@ -51,11 +54,7 @@ const HomePage: React.FC = () => {
     setImageFile(null);
     setImageUrl('');
 
-    // Navigate to the recipe list page with the new recipe as query parameters
-    router.push({
-      pathname: '/addedrecepie',
-      query: { recipes: JSON.stringify([...recipes, newRecipe]) },
-    });
+    router.push('/addedrecepie');
   };
 
   const handleIngredientChange = (index: number, value: string) => {

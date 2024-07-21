@@ -21,7 +21,7 @@ const Frontpage: React.FC = () => {
         <div style={styles.container}>
             <img src={"/Imges/logo2.png"} style={{
                 marginTop: '16px',
-                width: '55%',
+                width: '70%',
                 height: '180px',
 
             }} />
@@ -33,7 +33,7 @@ const Frontpage: React.FC = () => {
                 top: -72,
                 right: 0,
             }} />
-            <img src={"/Imges/labelimage.png"} style={{ width: '564.48px.48px', transform: 'rotate(-20.3deg) translatex(-100px)', height: '226.96px' }} />
+            <img src={"/Imges/labelimage.png"} style={{ width: '564.48px.48px', transform: 'rotate(-20.3deg) translatex(-100px)', height: '340.96px' }} />
           
             <Link href="/logincomponent" as="/logincomponent" passHref={true} legacyBehavior>
             <button
@@ -50,7 +50,7 @@ const Frontpage: React.FC = () => {
                     cursor: 'pointer',
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                     transition: 'background-color 0.3s ease',
-                    width: '70%',
+                    width: '90%',
                     textAlign: 'center',
                 }}
             >
