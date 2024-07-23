@@ -48,7 +48,7 @@ const RecipeListPage: React.FC = () => {
       <Drawer />
       <div style={{ paddingTop: '68px'}} >
       <h1 style={{ color: 'black',textAlign:'center' }}>All Recipes</h1>
-      <div style={{ paddingTop: '10px', paddingLeft: '9px',paddingRight:'9px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 2fr))', gap: '10px', color: 'black', borderRadius: '30px' }}>
+      <div style={{ paddingTop: '10px', paddingLeft: '12px',paddingRight:'12px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 2fr))', gap: '10px', color: 'black', borderRadius: '30px' }}>
         {recipes.map((recipe, index) => (
           <div key={index} style={{
             padding: '0px',

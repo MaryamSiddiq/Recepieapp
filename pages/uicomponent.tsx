@@ -26,7 +26,7 @@ const HomePage: React.FC = () => {
   const [imageUrl, setImageUrl] = useState('');
   const router = useRouter();
 
-  const handleAddRecipe = () => {
+  const handleAddRecipe = async () => {
     if (!imageUrl) {
       alert('Please upload an image');
       return;
@@ -41,20 +41,33 @@ const HomePage: React.FC = () => {
       imageUrl,
     };
 
-    const storedRecipes = localStorage.getItem('recipes');
-    const recipes = storedRecipes ? JSON.parse(storedRecipes) : [];
-    recipes.push(newRecipe);
-    localStorage.setItem('recipes', JSON.stringify(recipes));
+    try {
+      const response = await fetch('http://localhost:3000/api/Addrecepie', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRecipe),
+      });
 
-    setName('');
-    setCookingTime('');
-    setDescription('');
-    setIngredients(['']);
-    setSteps([{ description: '', time: 0 }]);
-    setImageFile(null);
-    setImageUrl('');
+      if (response.ok) {
+        setName('');
+        setCookingTime('');
+        setDescription('');
+        setIngredients(['']);
+        setSteps([{ description: '', time: 0 }]);
+        setImageFile(null);
+        setImageUrl('');
 
-    router.push('/addedrecepie');
+        router.push('/addedrecepie');
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error adding recipe:', error);
+      alert('Error adding recipe.');
+    }
   };
 
   const handleIngredientChange = (index: number, value: string) => {
