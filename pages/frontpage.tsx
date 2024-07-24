@@ -14,7 +14,7 @@ const Frontpage: React.FC = () => {
         // Handle login logic here (e.g., dispatching an action)
     
         // Redirect to homepage
-        router.push('/HomePage'); // Assuming your homepage is at /HomePage
+        router.push('/logincomponent'); // Assuming your homepage is at /HomePage
       };
 
     return (

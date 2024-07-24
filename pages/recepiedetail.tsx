@@ -103,7 +103,7 @@ const CookRecipePage: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: 'white', minHeight: '101vh', marginTop: '-20px', marginLeft: '-7px', padding: '0px' }}>
-      <img src={parsedRecipe.imageUrl} alt={parsedRecipe.name} style={{ maxWidth: '100%', width: '110%', height: '400px', margin: '10px 0' }} />
+      <img src={parsedRecipe.imageUrl} alt={parsedRecipe.name} style={{ maxWidth: '100%', width: '110%', height: '340px', margin: '10px 0' }} />
       
       <Box sx={{ width: '100%' }}>
         <Tabs 

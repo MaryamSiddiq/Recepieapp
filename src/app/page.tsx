@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   return (
     
       <div>
-        <LoginForm />
+        <Frontpage />
       </div>
    
   );

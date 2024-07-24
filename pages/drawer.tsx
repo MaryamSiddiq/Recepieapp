@@ -22,10 +22,13 @@ const Drawer: React.FC = () => {
         <ul style={styles.menuList}>
         <Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
               <a className="menu-link">Add Recipe</a>
-            </Link>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
+        </Link>
+        <li><Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
+              <a className="menu-link">Check Favourite</a>
+        </Link></li>
+        <li><Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
+              <a className="menu-link">Search Recepies</a>
+        </Link></li>
         </ul>
       </div>
       {isOpen && <div style={styles.overlay} onClick={toggleDrawer} />}

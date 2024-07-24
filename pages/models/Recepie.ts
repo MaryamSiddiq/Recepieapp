@@ -17,6 +17,7 @@ export interface IRecipe extends Document {
   ingredients: IIngredient[];
   steps: IStep[];
   imageUrl: string;
+  category: string; // Add this field
 }
 
 const IngredientSchema: Schema = new Schema({
@@ -35,8 +36,9 @@ const RecipeSchema: Schema = new Schema({
   ingredients: { type: [IngredientSchema], required: true },
   steps: { type: [StepSchema], required: true },
   imageUrl: { type: String, required: true },
+  category: { type: String, required: true }, // Add this field
 });
 
-const Recipe = mongoose.models.Recipe || mongoose.model<IRecipe>('Recipe', RecipeSchema);
+const Recipe = mongoose.models.Recipe || mongoose.model<IRecipe>('recepie', RecipeSchema);
 
 export default Recipe;
