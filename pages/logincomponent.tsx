@@ -104,7 +104,7 @@ const LoginForm: React.FC = () => {
         >
           Login
         </button>
-        <Link href="/SignupComponent" as="/SignupComponent" passHref={true} legacyBehavior>
+        <Link href="/loginverification" as="/loginverification" passHref={true} legacyBehavior>
           <button
             style={{
              marginTop:'16px',

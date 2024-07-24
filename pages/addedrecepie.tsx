@@ -49,11 +49,25 @@ const RecipeListPage: React.FC = () => {
     });
   };
 
-  const handleFavoriteToggle = (index: number) => {
+  const handleFavoriteToggle = async (index: number) => {
     const newRecipes = [...recipes];
     newRecipes[index].isFavorite = !newRecipes[index].isFavorite;
     setRecipes(newRecipes);
-    // Update favorite status in local storage or backend as needed
+
+    try {
+      const response = await fetch('http://localhost:3000/api/favorite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recipe: newRecipes[index] }),
+      });
+
+      const data = await response.json();
+      console.log('Favorite API response:', data);
+    } catch (error) {
+      console.error('Error updating favorite recipe:', error);
+    }
   };
 
   return (
@@ -118,7 +132,6 @@ const RecipeListPage: React.FC = () => {
           )}
         </div>
       </div>
-   
     </div>
   );
 };

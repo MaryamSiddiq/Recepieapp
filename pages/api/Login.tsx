@@ -31,14 +31,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       console.log('Fetched user from database:', user);
 
       if (!user) {
-        return res.status(401).json({ message: 'Invalid email or password.' });
+        return res.status(401).json({ message: 'Invalid email.' });
       }
 
       // Check if the provided password matches the stored hashed password
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid email or password.' });
+        return res.status(401).json({ message: 'Invalid password.' });
       }
 
       // Respond with user data (omit password)

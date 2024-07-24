@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faHeart, faSearch, faSignInAlt, faList } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 const Drawer: React.FC = () => {
@@ -12,24 +14,55 @@ const Drawer: React.FC = () => {
     <>
       <button onClick={toggleDrawer} style={styles.menuButton}>
         <span style={styles.menuIcon}>
-          <span style={{ ...styles.menuIconBar, transform: isOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none' }}></span>
+          <span style={{ ...styles.menuIconBar, transform: isOpen ? 'rotate(45deg) translate(5px, 9px)' : 'none' }}></span>
           <span style={{ ...styles.menuIconBar, opacity: isOpen ? 0 : 1 }}></span>
-          <span style={{ ...styles.menuIconBar, transform: isOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none' }}></span>
+          <span style={{ ...styles.menuIconBar, transform: isOpen ? 'rotate(-45deg) translate(5px, -10px)' : 'none' }}></span>
         </span>
       </button>
       <div style={{ ...styles.drawer, transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
         <button onClick={toggleDrawer} style={styles.closeButton}>Close</button>
         <ul style={styles.menuList}>
-        <Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
-              <a className="menu-link">Add Recipe</a>
-        </Link>
-        <li><Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
-              <a className="menu-link">Check Favourite</a>
-        </Link></li>
-        <li><Link href="/addrecepie" as="/addrecepie" passHref={true} legacyBehavior>
-              <a className="menu-link">Search Recepies</a>
-        </Link></li>
-        </ul>
+        <li style={styles.menuItem}>
+          <Link href="/HomePage" as="/HomePage" passHref legacyBehavior>
+            <a style={styles.menuLink}>
+              <FontAwesomeIcon icon={faPlus} style={styles.icon} />
+              Add Recipe
+            </a>
+          </Link>
+        </li>
+        <li style={styles.menuItem}>
+          <Link href="/favorite" as="/favorite" passHref legacyBehavior>
+            <a style={styles.menuLink}>
+              <FontAwesomeIcon icon={faHeart} style={styles.icon} />
+              Check Favourite
+            </a>
+          </Link>
+        </li>
+        <li style={styles.menuItem}>
+          <Link href="/addrecepie" as="/searchrecepie" passHref legacyBehavior>
+            <a style={styles.menuLink}>
+              <FontAwesomeIcon icon={faSearch} style={styles.icon} />
+              Search Recipes
+            </a>
+          </Link>
+        </li>
+        <li style={styles.menuItem}>
+          <Link href="/logincomponent" as="/logincomponent" passHref legacyBehavior>
+            <a style={styles.menuLink}>
+              <FontAwesomeIcon icon={faSignInAlt} style={styles.icon} />
+              Back to login
+            </a>
+          </Link>
+        </li>
+        <li style={styles.menuItem}>
+          <Link href="/addedrecepie" as="/addedrecepie" passHref legacyBehavior>
+            <a style={styles.menuLink}>
+              <FontAwesomeIcon icon={faList} style={styles.icon} />
+              Show All Recipes
+            </a>
+          </Link>
+        </li>
+      </ul>
       </div>
       {isOpen && <div style={styles.overlay} onClick={toggleDrawer} />}
     </>
@@ -47,6 +80,18 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: 'transparent',
     border: 'none',
     zIndex: 1000,
+  },
+  icon: {
+    marginRight: '38px',
+  },
+  menuLink: {
+    color: 'white',
+    textDecoration: 'none',
+    padding: '10px 20px',
+    display: 'block',
+    borderRadius: '5px',
+    fontSize:'24px',
+
   },
   menuIcon: {
     display: 'flex',
@@ -75,6 +120,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 999,
   },
   closeButton: {
+   marginLeft:'200px',
     background: 'none',
     border: 'none',
     color: 'white',
@@ -95,6 +141,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 998,
   },
+  
 };
 
 export default Drawer;
+
