@@ -14,7 +14,7 @@ interface Recipe {
   ingredients: string[];
   steps: Step[];
   imageUrl: string;
-  category: string;  // Add category to Recipe interface
+  category: string;
 }
 
 const HomePage: React.FC = () => {
@@ -25,23 +25,59 @@ const HomePage: React.FC = () => {
   const [steps, setSteps] = useState<Step[]>([{ description: '', time: 0 }]);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [category, setCategory] = useState('');  // Add state for category
+  const [category, setCategory] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    // Assuming you pass category as a query parameter
+    // Load state from localStorage
+    const savedState = localStorage.getItem('recipeFormState');
+    if (savedState) {
+      const {
+        name,
+        cookingTime,
+        description,
+        ingredients,
+        steps,
+        imageUrl,
+        category
+      } = JSON.parse(savedState);
+
+      setName(name || '');
+      setCookingTime(cookingTime || '');
+      setDescription(description || '');
+      setIngredients(ingredients || ['']);
+      setSteps(steps || [{ description: '', time: 0 }]);
+      setImageUrl(imageUrl || '');
+      setCategory(category || '');
+    }
+
+    // Load category from query parameter
     const { category } = router.query;
     if (category) {
       setCategory(category as string);
     }
   }, [router.query]);
 
+  useEffect(() => {
+    // Save state to localStorage
+    const state = {
+      name,
+      cookingTime,
+      description,
+      ingredients,
+      steps,
+      imageUrl,
+      category
+    };
+    localStorage.setItem('recipeFormState', JSON.stringify(state));
+  }, [name, cookingTime, description, ingredients, steps, imageUrl, category]);
+
   const handleAddRecipe = async () => {
     if (!imageFile) {
       alert('Please upload an image');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('cookingTime', cookingTime);
@@ -50,14 +86,15 @@ const HomePage: React.FC = () => {
     formData.append('steps', JSON.stringify(steps));
     formData.append('category', category);
     formData.append('image', imageFile);
-  
+
     try {
       const response = await fetch('http://localhost:3000/api/Addrecepie', {
         method: 'POST',
         body: formData,
       });
-  
+
       if (response.ok) {
+        // Clear state after successful submission
         setName('');
         setCookingTime('');
         setDescription('');
@@ -66,7 +103,10 @@ const HomePage: React.FC = () => {
         setImageFile(null);
         setImageUrl('');
         setCategory('');
-  
+
+        // Remove state from localStorage
+        localStorage.removeItem('recipeFormState');
+
         router.push('/addedrecepie');
       } else {
         const errorData = await response.json();
@@ -77,7 +117,6 @@ const HomePage: React.FC = () => {
       alert('Error adding recipe.');
     }
   };
-  
 
   const handleIngredientChange = (index: number, value: string) => {
     const newIngredients = [...ingredients];
@@ -191,7 +230,7 @@ const HomePage: React.FC = () => {
             style={{ backgroundColor: 'white', padding: '10px', margin: '10px 0', width: '90%', borderRadius: '5px', border: '1px solid #ccc' }}
           />
           {imageUrl && <img src={imageUrl} alt="Recipe" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'cover', margin: '10px 0' }} />}
-          <button onSubmit={handleAddRecipe} type="submit" style={{ padding: '10px 20px', margin: '10px 0', backgroundColor: '#E9445C', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          <button type="submit" style={{ padding: '10px 20px', margin: '10px 0', backgroundColor: '#E9445C', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
             Add Recipe
           </button>
         </form>

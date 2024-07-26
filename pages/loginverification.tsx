@@ -1,76 +1,4 @@
-/*import React, { useState } from 'react';
 
-const SignupForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [verificationSent, setVerificationSent] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const signupData = { email, password };
-
-    try {
-      const response = await fetch('http://localhost:3000/api/sendverificationemail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(signupData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setVerificationSent(true);
-      } else {
-        console.error(data.message);
-        alert(data.message);
-      }
-    } catch (error) {
-      console.error('Error during signup:', error);
-      alert('An unexpected error occurred.');
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <h3>Sign Up</h3>
-      <div>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="domain@gmail.com"
-          required
-        />
-      </div>
-      <div>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter Password"
-          required
-        />
-        <button type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? 'Hide' : 'Show'} Password
-        </button>
-      </div>
-      <button type="submit">Sign Up</button>
-      {verificationSent && <p>A verification email has been sent to your email address. Please check your inbox.</p>}
-    </form>
-  );
-};
-
-export default SignupForm;*/
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -195,4 +123,3 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
-

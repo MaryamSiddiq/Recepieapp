@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Drawer from './drawer';
-import Category from './components/Category';
+import Category from './Category';
 
 interface Category {
   name: string;

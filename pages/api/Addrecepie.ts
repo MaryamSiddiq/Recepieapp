@@ -93,3 +93,81 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     res.status(405).json({ message: 'Method not allowed' });
   }
 }
+
+/*
+// pages/api/recipes.ts
+import { NextApiRequest, NextApiResponse } from "next";
+import multer from "multer";
+import { AddRecipe } from "../../src/usecases/AddRecipe"; // Adjust path as necessary
+
+const upload = multer({ dest: "public/uploads/" });
+
+const uploadMiddleware = (req: NextApiRequest, res: NextApiResponse, next: () => void) => {
+  upload.single("image")(req as any, res as any, (err) => {
+    if (err) {
+      console.error("Multer upload error:", err);
+      return res.status(500).json({ message: "Failed to upload image" });
+    }
+    next();
+  });
+};
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+type Data = {
+  message: string;
+  data?: any;
+};
+
+const addRecipe = new AddRecipe();
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  if (req.method === "POST") {
+    return new Promise<void>((resolve) => {
+      uploadMiddleware(req as any, res, async () => {
+        const { name, cookingTime, description, ingredients, steps, category } = req.body;
+        const image = (req as any).file;
+
+        // Basic validation
+        if (!name || !cookingTime || !description || !ingredients || !steps || !category || !image) {
+          res.status(400).json({ message: "All fields are required." });
+          resolve();
+          return;
+        }
+
+        try {
+          await addRecipe.execute({
+            name,
+            cookingTime,
+            description,
+            ingredients: JSON.parse(ingredients),
+            steps: JSON.parse(steps),
+            image,
+            category,
+          });
+
+          res.status(201).json({ message: "Recipe added successfully." });
+        } catch (error) {
+          console.error("Error processing the image:", error);
+          res.status(500).json({ message: "Error processing the image." });
+        }
+        resolve();
+      });
+    });
+  } else if (req.method === "GET") {
+    try {
+      const recipes = await addRecipe.findAll();
+      res.status(200).json({ message: "Recipes fetched successfully", data: recipes });
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+      res.status(500).json({ message: "Error fetching recipes" });
+    }
+  } else {
+    res.status(405).json({ message: "Method not allowed" });
+  }
+}
+*/
